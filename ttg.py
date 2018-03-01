@@ -94,6 +94,8 @@ class WFF:
                         tmpList.append(i)
                 except:
                     tmpList.append(i)
+        while len(tmpList) > 0:
+            postForm.append(tmpList.pop())
         return postForm
         
     def logicEval(self, truthValueDict):
@@ -113,7 +115,8 @@ class WFF:
 if __name__ == '__main__':
     wff = WFF(input())
     print()
-    print(wff.wff)
-    print(wff.pVars)
-    print(wff.ptvDicts)
+    # print(wff.wff)
+    # print(wff.postForm)
+    # print(wff.pVars)
+    # print(wff.ptvDicts)
     print(wff.truthTable)

@@ -27,25 +27,26 @@ def iff(a, b):
 
 class WFF:
     precedence = {
-        '¬': 1,
-        '∧': 2,
-        '∨': 3,
-        '→': 4,
-        '←': 4,
-        '↔︎': 5,
+        '!': 5,
+        '&': 4,
+        '|': 3,
+        '>': 2,
+        '<': 2,
+        '=': 1,
     }
 
     operator = {
-        '¬': not_,
-        '∧': and_,
-        '∨': or_,
-        '→': imply,
-        '←': back_imply,
-        '↔︎': iff,
+        '!': not_,
+        '&': and_,
+        '|': or_,
+        '>': imply,
+        '<': back_imply,
+        '=': iff,
     }
 
     def __init__(self, wff):
-        self.wff = wff.replace(' ', '')
+        self.wff = wff.replace(' ', '').replace('->', '>').replace('<-', '<').replace('<->', '=')
+        self.postForm = self.postFormTransfer()
         self.pVars = self.get_pVars()
         self.ptvDicts = self.possibleTruthValueDictList()
         self.truthTable = [self.logicEval(ptvDict) for ptvDict in self.ptvDicts]
@@ -72,22 +73,41 @@ class WFF:
         TorF()
         return ptvDicts
 
-    def logicEval(self, truthValueDict):
-        valueList = []
-        opList = []
+    def postFormTransfer(self):
+        postForm = []
+        tmpList = []
         for i in self.wff:
             if i.isalpha():
-                valueList.append(truthValueDict[i])
+                postForm.append(i)
             elif i == ')':
-                op = WFF.operator[opList.pop()]
-                opList.pop()
-                if op == not_:
-                    valueList.append(op(valueList.pop()))
-                else:
-                    valueList.append(op(valueList.pop(-2), valueList.pop(-1)))
+                while True:
+                    op = tmpList.pop()
+                    if op == '(':
+                        break
+                    else:
+                        postForm.append(op)
             else:
-                opList.append(i)
-        return valueList[0]
+                try:
+                    if WFF.precedence[tmpList[-1]] >= WFF.precedence[i]:
+                        postForm.append(tmpList.pop())
+                    else:
+                        tmpList.append(i)
+                except:
+                    tmpList.append(i)
+        return postForm
+        
+    def logicEval(self, truthValueDict):
+        container = []
+        for i in self.postForm:
+            if i.isalpha():
+                container.append(truthValueDict[i])
+            else:
+                op = WFF.operator[i]
+                if i == '!':
+                    container.append(op(container.pop()))
+                else:
+                    container.append(op(container.pop(-2), container.pop()))
+        return container[0]
 
 
 if __name__ == '__main__':

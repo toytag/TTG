@@ -1,12 +1,18 @@
-# TTG
+# Truth Table Generator
 
 Truth table generator for well-formed-formula consists of propositional variables
 
 ## Notation
 
-`!`     is for Negation         `¬`  
-`&`     is for Conjunction      `∧`  
-`|`     is for Disconjunction   `∨`
-`->`    is for Implication      `⟶`  
-`<-`    is for Anti-implication `⟵`  
-`<->`   is for Bi-Implication   `⟷`  
+|Connectors|Standard Notation|In This Program|
+|----------|:---------------:|:---------:|
+|Negation  |¬                |!          |
+|Conjunction|∧               |&          |
+|Disconjunction|∨            |&#124;     |
+|Implication|→               |->         |
+|Anti-implication|←          |<-         |
+|Bi-Implication|↔︎            |<->        |
+
+  Example:  
+  Standard -> (¬p→q)∨q∧(r↔︎s)  
+  In this Program -> (!p->q)|q&(r<->s)  

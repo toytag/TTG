@@ -4,7 +4,7 @@ Truth table generator for well-formed-formula consists of propositional variable
 
 ## Notation
 
-|Connectors|Standard Notation|In This Program|
+|Logical Connectives|Standard Notation|In This Program|
 |----------|:---------------:|:---------:|
 |Negation  |¬                |!          |
 |Conjunction|∧               |&          |

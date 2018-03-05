@@ -60,6 +60,7 @@ class WFF:
         pVars.sort()
         return pVars
 
+    # an alternative is itertools.product
     def possibleTruthValueDictList(self):
         def TorF(n=0, d={}):
             if n == len(self.pVars):

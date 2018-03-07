@@ -45,7 +45,7 @@ class WFF:
     }
 
     def __init__(self, wff):
-        self.wff = wff.replace(' ', '').replace('->', '>').replace('<-', '<').replace('<->', '=')
+        self.wff = wff.replace(' ', '').replace('<->', '=').replace('->', '>').replace('<-', '<')
         self.postForm = self.postFormTransfer()
         self.pVars = self.get_pVars()
         self.ptvDicts = self.possibleTruthValueDictList()
@@ -89,11 +89,11 @@ class WFF:
                         postForm.append(op)
             else:
                 try:
-                    if WFF.precedence[tmpList[-1]] >= WFF.precedence[i]:
+                    while WFF.precedence[tmpList[-1]] >= WFF.precedence[i]:
                         postForm.append(tmpList.pop())
-                    else:
-                        tmpList.append(i)
+                    tmpList.append(i)
                 except:
+                    print(i)
                     tmpList.append(i)
         while len(tmpList) > 0:
             postForm.append(tmpList.pop())

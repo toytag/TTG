@@ -14,5 +14,5 @@ Truth table generator for well-formed-formula consists of propositional variable
 |Bi-Implication|↔︎            |<->        |
 
   Example:  
-  Standard -> (¬p→q)∨q∧(r↔︎s)  
-  In this Program -> (!p->q)|q&(r<->s)  
+  Standard == (¬p→q)∨q∧(r↔︎s)  
+  In this Program == (!p->q)|q&(r<->s)  

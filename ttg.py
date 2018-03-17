@@ -93,7 +93,6 @@ class WFF:
                         postForm.append(tmpList.pop())
                     tmpList.append(i)
                 except:
-                    print(i)
                     tmpList.append(i)
         while len(tmpList) > 0:
             postForm.append(tmpList.pop())
